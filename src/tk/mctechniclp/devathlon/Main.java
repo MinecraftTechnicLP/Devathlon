@@ -19,7 +19,7 @@ public class Main extends JavaPlugin {
 		instance = this;
 		registerSpells();
 		registerListeners();
-		runTask();
+		runTasks();
 
 	}
 
@@ -42,7 +42,7 @@ public class Main extends JavaPlugin {
 	}
 	
 	
-	private void runTask() {
+	private void runTasks() {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 
 			@Override
@@ -54,5 +54,17 @@ public class Main extends JavaPlugin {
 			
 		}, 0L, 40L);
 		/** Sending packet more often than needed to prevent fading **/
+		
+		
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+
+			@Override
+			public void run() {
+				for(MMPlayer p : MMPlayer.getAll()) {
+					p.tickStatusEffects();
+				}
+			}
+			
+		}, 0L, 1L);
 	}
 }

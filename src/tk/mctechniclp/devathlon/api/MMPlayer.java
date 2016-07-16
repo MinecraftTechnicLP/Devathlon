@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 
-import tk.mctechniclp.devathlon.spells.SelfSpell;
 import tk.mctechniclp.devathlon.spells.SpellManager;
 import tk.mctechniclp.devathlon.utils.ActionBarUtils;
 
@@ -13,7 +12,9 @@ import tk.mctechniclp.devathlon.utils.ActionBarUtils;
 public class MMPlayer {
 	private UUID uuid;
 	private Element[] spell;
-	private String spellMsg = Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode();
+	private String spellMsg;
+	private ArrayList<StatusEffect> effects;
+	private ShieldSE shield;
 	
 	/**
 	 * <b>DO NOT USE THIS CONSTRUCTOR</b><br>
@@ -23,6 +24,8 @@ public class MMPlayer {
 	public MMPlayer(UUID uuid) {
 		this.uuid = uuid;
 		this.spell = new Element[] {Element.NONE, Element.NONE, Element.NONE, Element.NONE, Element.NONE};
+		this.spellMsg = Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode();
+		this.effects = new ArrayList<StatusEffect>();
 	}
 	
 	public UUID getUUID() {
@@ -60,7 +63,25 @@ public class MMPlayer {
 			SpellManager.getSelfSpell(spell);
 		}
 	}
-
+	
+	public void addStatusEffect(StatusEffect e) {
+		effects.add(e);
+	}
+	
+	public void removeStatusEffect(StatusEffect e) {
+		effects.remove(e);
+	}
+	
+	public void tickStatusEffects() {
+		for(StatusEffect st : new ArrayList<StatusEffect> (effects)) {
+			st.tick(this);
+		}
+		if(shield != null) shield.tick(this);
+	}
+	
+	
+	
+	
 	public static ArrayList<MMPlayer> all = new ArrayList<MMPlayer>();
 	
 	public static MMPlayer getByUUID(UUID uuid) {
@@ -76,6 +97,10 @@ public class MMPlayer {
 	
 	public static ArrayList<MMPlayer> getAll() {
 		return new ArrayList<MMPlayer> (all);
+	}
+
+	public void setShield(ShieldSE shield) {
+		this.shield = shield;
 	}
 	
 }
