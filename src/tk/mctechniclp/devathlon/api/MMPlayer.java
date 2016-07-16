@@ -60,7 +60,7 @@ public class MMPlayer {
 	public static ArrayList<MMPlayer> all = new ArrayList<MMPlayer>();
 	
 	public static MMPlayer getByUUID(UUID uuid) {
-		for(MMPlayer p : all) {
+		for(MMPlayer p : getAll()) {
 			if(p.getUUID().equals(uuid)) {
 				return p;
 			}
