@@ -1,7 +1,7 @@
 package tk.mctechniclp.devathlon.api;
 
 public abstract class StatusEffect {
-	private int ticks;
+	protected int ticks;
 	
 	/**
 	 * 

@@ -24,7 +24,7 @@ public class MMPlayer {
 	public MMPlayer(UUID uuid) {
 		this.uuid = uuid;
 		this.spell = new Element[] {Element.NONE, Element.NONE, Element.NONE, Element.NONE, Element.NONE};
-		this.spellMsg = Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode() + Element.NONE.getChatColor() + Element.NONE.getCharCode();
+		this.spellMsg = Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation();
 		this.effects = new ArrayList<StatusEffect>();
 	}
 	
@@ -49,7 +49,7 @@ public class MMPlayer {
 	private void updateIndicator() {
 		spellMsg = "";
 		for(int i = 0; i < 5; i++) {
-			spellMsg += spell[i].getChatColor() + spell[i].getCharCode();
+			spellMsg += spell[i].getStringRepresentation();
 		}
 		sendSpellBar();
 	}
@@ -79,6 +79,17 @@ public class MMPlayer {
 		if(shield != null) shield.tick(this);
 	}
 	
+	public void setShield(ShieldSE shield) {
+		this.shield = shield;
+	}
+
+	public void removeShield() {
+		shield = null;
+	}
+	
+	public ShieldSE getShield() {
+		return shield;
+	}
 	
 	
 	
@@ -97,10 +108,6 @@ public class MMPlayer {
 	
 	public static ArrayList<MMPlayer> getAll() {
 		return new ArrayList<MMPlayer> (all);
-	}
-
-	public void setShield(ShieldSE shield) {
-		this.shield = shield;
 	}
 	
 }

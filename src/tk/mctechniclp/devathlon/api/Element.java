@@ -9,7 +9,7 @@ public enum Element {
 	FIRE(ChatColor.GOLD + "F", 1, ChatColor.GOLD, DamageCause.FIRE_TICK, Particle.FLAME),
 	WATER("\u2652", 2, ChatColor.BLUE, DamageCause.DROWNING, Particle.WATER_WAKE),
 	ICE("\u2744", 3, ChatColor.AQUA, DamageCause.MELTING, Particle.CLOUD),
-	EARTH("E", 4, ChatColor.GRAY, DamageCause.SUFFOCATION, Particle.VILLAGER_ANGRY),
+	EARTH("E", 4, ChatColor.GRAY, DamageCause.ENTITY_ATTACK, Particle.VILLAGER_ANGRY),
 	HEAL("H", 5, ChatColor.GREEN, null, Particle.VILLAGER_HAPPY),
 	DAMAGE("\u2623", 6, ChatColor.RED, DamageCause.CUSTOM, Particle.REDSTONE),
 	SHIELD("S", 7, ChatColor.YELLOW, DamageCause.PROJECTILE, Particle.DRIP_LAVA),
@@ -47,7 +47,7 @@ public enum Element {
 	}
 	
 	public String getStringRepresentation() {
-		return getChatColor().toString() + ChatColor.BOLD + getCharCode() + ChatColor.RESET;
+		return getChatColor().toString() + ChatColor.BOLD + getCharCode();
 	}
 	
 	public int getSlot() {
@@ -57,6 +57,13 @@ public enum Element {
 	public static Element getBySlot(int slot) {
 		for(Element e : values()) {
 			if(e.getSlot() == slot) return e;
+		}
+		return null;
+	}
+	
+	public static Element getByDamageCause(DamageCause cause) {
+		for(Element e : values()) {
+			if(cause != null && e.getDamageCause() == cause) return e;
 		}
 		return null;
 	}
