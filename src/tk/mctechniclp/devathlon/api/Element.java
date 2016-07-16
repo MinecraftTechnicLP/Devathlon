@@ -14,8 +14,8 @@ public enum Element {
 	DAMAGE("\u2623", 6, ChatColor.RED, DamageCause.CUSTOM, Particle.REDSTONE),
 	SHIELD("S", 7, ChatColor.YELLOW, DamageCause.PROJECTILE, Particle.DRIP_LAVA),
 	ELEC("\u2607", 8, ChatColor.LIGHT_PURPLE, DamageCause.LIGHTNING, Particle.PORTAL),
-	NONE("N", -2, ChatColor.WHITE, null, null);
-	//\u2609
+	NONE("\u2609", -2, ChatColor.WHITE, null, null);
+	
 	private String charCode;
 	private int slot;
 	private ChatColor color;

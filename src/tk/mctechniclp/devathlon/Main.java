@@ -4,7 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import tk.mctechniclp.devathlon.api.MMPlayer;
+import tk.mctechniclp.devathlon.entities.MagicEntity;
 import tk.mctechniclp.devathlon.listeners.AddElementListener;
+import tk.mctechniclp.devathlon.listeners.CollideListener;
+import tk.mctechniclp.devathlon.listeners.DamageListener;
 import tk.mctechniclp.devathlon.listeners.FireSpellListener;
 import tk.mctechniclp.devathlon.spells.SpellManager;
 import tk.mctechniclp.devathlon.spells.SpellPriority;
@@ -35,6 +38,8 @@ public class Main extends JavaPlugin {
 	private static void registerListeners() {
 		Bukkit.getPluginManager().registerEvents(new FireSpellListener(), instance);
 		Bukkit.getPluginManager().registerEvents(new AddElementListener(), instance);
+		Bukkit.getPluginManager().registerEvents(new DamageListener(), instance);
+		Bukkit.getPluginManager().registerEvents(new CollideListener(), instance);
 	}
 	
 	private static void registerSpells() {
@@ -62,6 +67,9 @@ public class Main extends JavaPlugin {
 			public void run() {
 				for(MMPlayer p : MMPlayer.getAll()) {
 					p.tickStatusEffects();
+				}
+				for(MagicEntity e : MagicEntity.getAll()) {
+					e.tick();
 				}
 			}
 			

@@ -38,7 +38,11 @@ public class ShieldSE extends StatusEffect {
 			}
 			bp.setHealth(bp.getHealth() + heal);
 		}
-		
+		playParticles(bp);
+	}
+
+	@Override
+	protected void playParticles(Player p) {
 		if(circleCache == null) {
 			circleCache = new ArrayList<RelativeLoc2>();
 			for(double i = 0; i < Math.PI * 2; i += Math.PI / 5) {
@@ -46,7 +50,7 @@ public class ShieldSE extends StatusEffect {
 			}
 		}
 		
-		Location loc = bp.getLocation();
+		Location loc = p.getLocation();
 		for(RelativeLoc2 l : circleCache) {
 			loc.getWorld().spawnParticle(es[0].getParticle(), l.toLocation(loc.clone().add(0, 0.2, 0)), 1, 0, 0, 0, 0, null);
 			loc.getWorld().spawnParticle(es[1].getParticle(), l.toLocation(loc.clone().add(0, 0.4, 0)), 1, 0, 0, 0, 0, null);
@@ -58,5 +62,4 @@ public class ShieldSE extends StatusEffect {
 	public Element[] getElements() {
 		return es;
 	}
-	
 }
