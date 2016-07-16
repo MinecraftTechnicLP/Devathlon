@@ -46,13 +46,16 @@ public class MMPlayer {
 		for(int i = 0; i < 5; i++) {
 			spellMsg += spell[i].getChatColor() + spell[i].getCharCode();
 		}
+		sendSpellBar();
+	}
+	
+	public void sendSpellBar() {
 		ActionBarUtils.sendActionBar(Bukkit.getPlayer(uuid), spellMsg);
 	}
 	
 	public void fireSpell(boolean self) {
 		
 	}
-
 
 	public static ArrayList<MMPlayer> all = new ArrayList<MMPlayer>();
 	
