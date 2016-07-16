@@ -12,7 +12,8 @@ public class SelfShieldSpell extends SelfSpell {
 	public SelfShieldSpell(Element[] elements) {
 		super(elements);
 	}
-
+	
+	
 	@Override
 	public boolean isActivatedBy(Element[] elements) {
 		return Arrays.asList(elements).contains(Element.SHIELD);

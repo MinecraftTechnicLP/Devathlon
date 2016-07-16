@@ -9,50 +9,46 @@ import tk.mctechniclp.devathlon.api.Element;
 
 public class SpellManager {
 	
-	private static HashMap<Class<? extends SelfSpell>, SpellPriority> selfSpells;
-	private static HashMap<Class<? extends TargetSpell>, SpellPriority> targetSpells;
+	private static HashMap<SelfSpell, SpellPriority> selfSpells;
+	private static HashMap<TargetSpell, SpellPriority> targetSpells;
 	
 	static {
-		selfSpells = new HashMap<Class<? extends SelfSpell>, SpellPriority>();
-		targetSpells = new HashMap<Class<? extends TargetSpell>, SpellPriority>();
+		selfSpells = new HashMap<SelfSpell, SpellPriority>();
+		targetSpells = new HashMap<TargetSpell, SpellPriority>();
 	}
 	
-	public static void registerSelfSpell(Class<? extends SelfSpell> spell, SpellPriority p) {
+	public static void registerSelfSpell(SelfSpell spell, SpellPriority p) {
 		selfSpells.put(spell, p);
 	}
 	
-	public static void registerTargetSpell(Class<? extends TargetSpell> spell, SpellPriority p) {
+	public static void registerTargetSpell(TargetSpell spell, SpellPriority p) {
 		targetSpells.put(spell, p);
 	}
 	
-	public static SelfSpell getSelfSpell(Element[] elements) {
-		HashMap<Class<? extends SelfSpell>, SpellPriority> list = new HashMap<Class<? extends SelfSpell>, SpellPriority> (selfSpells);
+	public static Spell getSpell(Element[] elements, boolean self) {
+		HashMap<Spell, SpellPriority> list = new HashMap<Spell, SpellPriority> (self ? selfSpells : targetSpells);
 		
-		Entry<Class<? extends SelfSpell>, SpellPriority> selected = null;
+		Entry<Spell, SpellPriority> selected = null;
 		
-		for(Entry<Class<? extends SelfSpell>, SpellPriority> e : list.entrySet()) {
-			try {
-				Method m = e.getKey().getMethod("isActivatedBy", Element[].class);
-				System.out.print(m.toString());
-				if((boolean) m.invoke(null, new Object[] {elements})) {
-					if(selected == null || selected.getValue().higherThan(selected.getValue())) {
-						selected = e;
-						if(e.getValue() == SpellPriority.MAGICK) break;
-					}
-				}
-			} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
-				e1.printStackTrace();
+		for(Entry<Spell, SpellPriority> e : list.entrySet()) {
+			if(e.getKey().isActivatedBy(elements) && (selected == null || e.getValue().higherThan(selected.getValue()))) {
+				selected = e;
+				if(e.getValue() == SpellPriority.MAGICK) return e.getKey();
 			}
 		}
 		
-		
+		return instantiate(selected.getKey(), elements);
+	}
+	
+	private static Spell instantiate(Spell s, Element[] elements) {
 		try {
-			return SelfSpell.class.getConstructor(Element[].class).newInstance((Object) elements);
+			return s.getClass().getConstructor(Element[].class).newInstance(new Object[] {elements});
 		} catch (InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException e1) {
-			e1.printStackTrace();
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
+	
 }

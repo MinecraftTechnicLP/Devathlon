@@ -13,6 +13,8 @@ import tk.mctechniclp.devathlon.projectiles.Projectile;
 import tk.mctechniclp.devathlon.spells.SpellManager;
 import tk.mctechniclp.devathlon.spells.SpellPriority;
 import tk.mctechniclp.devathlon.spells.self.SelfShieldSpell;
+import tk.mctechniclp.devathlon.spells.target.TargetProjectileSpell;
+import tk.mctechniclp.devathlon.spells.target.TargetShieldSpell;
 
 public class Main extends JavaPlugin {
 	
@@ -44,7 +46,10 @@ public class Main extends JavaPlugin {
 	}
 	
 	private static void registerSpells() {
-		SpellManager.registerSelfSpell(SelfShieldSpell.class, SpellPriority.LOWEST);
+		SpellManager.registerSelfSpell(new SelfShieldSpell(null), SpellPriority.LOWEST);
+		
+		SpellManager.registerTargetSpell(new TargetProjectileSpell(null), SpellPriority.LOWEST);
+		SpellManager.registerTargetSpell(new TargetShieldSpell(null), SpellPriority.LOWEST);
 	}
 	
 	

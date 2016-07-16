@@ -23,9 +23,8 @@ public class MMPlayer {
 	 */
 	public MMPlayer(UUID uuid) {
 		this.uuid = uuid;
-		this.spell = new Element[] {Element.NONE, Element.NONE, Element.NONE, Element.NONE, Element.NONE};
-		this.spellMsg = Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation();
 		this.effects = new ArrayList<StatusEffect>();
+		clearSpell();
 	}
 	
 	public UUID getUUID() {
@@ -59,9 +58,9 @@ public class MMPlayer {
 	}
 	
 	public void fireSpell(boolean self) {
-		if(self) {
-			SpellManager.getSelfSpell(spell);
-		}
+		if(spell[4] == Element.NONE) return;
+		SpellManager.getSpell(spell, self).fire(this);
+		clearSpell();
 	}
 	
 	public void addStatusEffect(StatusEffect e) {
@@ -89,6 +88,11 @@ public class MMPlayer {
 	
 	public ShieldSE getShield() {
 		return shield;
+	}
+	
+	private void clearSpell() {
+		this.spell = new Element[] {Element.NONE, Element.NONE, Element.NONE, Element.NONE, Element.NONE};
+		this.spellMsg = Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation();
 	}
 	
 	

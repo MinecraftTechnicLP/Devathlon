@@ -8,7 +8,7 @@ import org.bukkit.util.Vector;
 public class DamageStream extends StreamProjectile {
 
 	public DamageStream(Location loc, Vector vec) {
-		super(loc, vec, 0.2, 0.2, 40, Particle.REDSTONE);
+		super(loc, vec, 0.2, 40, 0.2, Particle.REDSTONE);
 	}
 
 	@Override

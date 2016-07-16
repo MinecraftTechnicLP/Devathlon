@@ -10,6 +10,7 @@ public abstract class Spell {
 		this.elements = elements;
 	}
 	
+	
 	public abstract boolean isActivatedBy(Element[] elements);
 	
 	public abstract void fire(MMPlayer p);
