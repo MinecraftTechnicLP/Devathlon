@@ -9,6 +9,7 @@ import org.bukkit.util.Vector;
 import tk.mctechniclp.devathlon.api.Element;
 import tk.mctechniclp.devathlon.api.MMPlayer;
 import tk.mctechniclp.devathlon.api.ShieldSE;
+import tk.mctechniclp.devathlon.spells.target.TargetProjectileSpell;
 import tk.mctechniclp.devathlon.spells.target.TargetShieldSpell;
 
 public class FireSpellListener implements Listener {
@@ -31,6 +32,9 @@ public class FireSpellListener implements Listener {
 			mmp.setShield(new ShieldSE(new Element[] {Element.ELEC, Element.FIRE, Element.SHIELD, Element.WATER, Element.DAMAGE}));
 			TargetShieldSpell spell = new TargetShieldSpell(new Element[] {Element.ELEC, Element.FIRE, Element.SHIELD, Element.WATER, Element.DAMAGE});
 			spell.fire(mmp);
+			
+			TargetProjectileSpell spell2 = new TargetProjectileSpell(new Element[] {Element.ELEC, Element.FIRE, Element.SHIELD, Element.WATER, Element.DAMAGE});
+			spell2.fire(mmp);
 			
 		}
 	}

@@ -36,7 +36,7 @@ public class ShieldSE extends StatusEffect {
 			for(Element e : es) {
 				if(e == Element.HEAL) heal++;
 			}
-			bp.setHealth(bp.getHealth() + heal);
+			bp.setHealth(bp.getHealth() + heal > 20 ? 20 : bp.getHealth() + heal);
 		}
 		playParticles(bp);
 	}

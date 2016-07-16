@@ -9,6 +9,7 @@ import tk.mctechniclp.devathlon.listeners.AddElementListener;
 import tk.mctechniclp.devathlon.listeners.CollideListener;
 import tk.mctechniclp.devathlon.listeners.DamageListener;
 import tk.mctechniclp.devathlon.listeners.FireSpellListener;
+import tk.mctechniclp.devathlon.projectiles.Projectile;
 import tk.mctechniclp.devathlon.spells.SpellManager;
 import tk.mctechniclp.devathlon.spells.SpellPriority;
 import tk.mctechniclp.devathlon.spells.self.SelfShieldSpell;
@@ -70,6 +71,9 @@ public class Main extends JavaPlugin {
 				}
 				for(MagicEntity e : MagicEntity.getAll()) {
 					e.tick();
+				}
+				for(Projectile p : Projectile.getAll()) {
+					p.tick();
 				}
 			}
 			

@@ -26,22 +26,24 @@ public class TargetShieldSpell extends TargetSpell {
 	public void fire(MMPlayer p) {
 		ArrayList<Element> list = new ArrayList<Element> (Arrays.asList(elements));
 		
-		Location loc = Bukkit.getPlayer(p.getUUID()).getLocation();
+		Location loc = Bukkit.getPlayer(p.getUUID()).getEyeLocation();
 		Location[] locs = new Location[8];
 		
-		double yaw = Math.toRadians(loc.getYaw() - 30 + 180);
+		double defYaw = loc.getYaw() > 0 ? loc.getYaw() : 360 - Math.abs(loc.getYaw());
+		
+		double yaw = Math.toRadians(defYaw - 30);
 		locs[0] = loc.clone().add(Math.sin(yaw) * 4, 0, Math.cos(yaw) * 4);
 		locs[1] = locs[0].clone().add(0, 1, 0);
 		
-		yaw = Math.toRadians(loc.getYaw() - 10 + 180);
+		yaw = Math.toRadians(defYaw - 10);
 		locs[2] = loc.clone().add(Math.sin(yaw) * 4, 0, Math.cos(yaw) * 4);
 		locs[3] = locs[2].clone().add(0, 1, 0);
 		
-		yaw = Math.toRadians(loc.getYaw() + 10 + 180);
+		yaw = Math.toRadians(defYaw + 10);
 		locs[4] = loc.clone().add(Math.sin(yaw) * 4, 0, Math.cos(yaw) * 4);
 		locs[5] = locs[4].clone().add(0, 1, 0);
 		
-		yaw = Math.toRadians(loc.getYaw() + 30 + 180);
+		yaw = Math.toRadians(defYaw + 30);
 		locs[6] = loc.clone().add(Math.sin(yaw) * 2, 0, Math.cos(yaw) * 4);
 		locs[7] = locs[6].clone().add(0, 1, 0);
 		
