@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 
+import tk.mctechniclp.devathlon.spells.SelfSpell;
+import tk.mctechniclp.devathlon.spells.SpellManager;
 import tk.mctechniclp.devathlon.utils.ActionBarUtils;
 
 
@@ -54,7 +56,9 @@ public class MMPlayer {
 	}
 	
 	public void fireSpell(boolean self) {
-		
+		if(self) {
+			SpellManager.getSelfSpell(spell);
+		}
 	}
 
 	public static ArrayList<MMPlayer> all = new ArrayList<MMPlayer>();
