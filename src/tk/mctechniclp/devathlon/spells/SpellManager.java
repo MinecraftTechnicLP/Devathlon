@@ -32,7 +32,7 @@ public class SpellManager {
 		for(Entry<Spell, SpellPriority> e : list.entrySet()) {
 			if(e.getKey().isActivatedBy(elements) && (selected == null || e.getValue().higherThan(selected.getValue()))) {
 				selected = e;
-				if(e.getValue() == SpellPriority.MAGICK) return e.getKey();
+				if(e.getValue() == SpellPriority.MAGICK) return instantiate(selected.getKey(), elements);
 			}
 		}
 		

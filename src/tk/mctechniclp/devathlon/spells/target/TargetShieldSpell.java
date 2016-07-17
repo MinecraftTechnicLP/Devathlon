@@ -1,59 +1,39 @@
 package tk.mctechniclp.devathlon.spells.target;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import tk.mctechniclp.devathlon.api.Element;
 import tk.mctechniclp.devathlon.api.MMPlayer;
-import tk.mctechniclp.devathlon.entities.WaterShieldEntity;
+import tk.mctechniclp.devathlon.entities.ShieldEntity;
 import tk.mctechniclp.devathlon.spells.TargetSpell;
 
 public class TargetShieldSpell extends TargetSpell {
 
 	public TargetShieldSpell(Element[] elements) {
-		super(elements);
+		super(elements, new Element[] {Element.SHIELD});
 	}
-
-	@Override
-	public boolean isActivatedBy(Element[] elements) {
-		return Arrays.asList(elements).contains(Element.SHIELD);
+	
+	/**
+	 * Only Use this constructor to register the Spell
+	 * @param required required Elements
+	 */
+	public TargetShieldSpell() {
+		super(new Element[] {Element.SHIELD});
 	}
+	
 
 	@Override
 	public void fire(MMPlayer p) {
-		ArrayList<Element> list = new ArrayList<Element> (Arrays.asList(elements));
-		
 		Location loc = Bukkit.getPlayer(p.getUUID()).getEyeLocation();
 		Location[] locs = new Location[8];
 		
-		double defYaw = loc.getYaw() > 0 ? loc.getYaw() : 360 - Math.abs(loc.getYaw());
-		
-		double yaw = Math.toRadians(defYaw - 30);
-		locs[0] = loc.clone().add(Math.sin(yaw) * 4, 0, Math.cos(yaw) * 4);
-		locs[1] = locs[0].clone().add(0, 1, 0);
-		
-		yaw = Math.toRadians(defYaw - 10);
-		locs[2] = loc.clone().add(Math.sin(yaw) * 4, 0, Math.cos(yaw) * 4);
-		locs[3] = locs[2].clone().add(0, 1, 0);
-		
-		yaw = Math.toRadians(defYaw + 10);
-		locs[4] = loc.clone().add(Math.sin(yaw) * 4, 0, Math.cos(yaw) * 4);
-		locs[5] = locs[4].clone().add(0, 1, 0);
-		
-		yaw = Math.toRadians(defYaw + 30);
-		locs[6] = loc.clone().add(Math.sin(yaw) * 2, 0, Math.cos(yaw) * 4);
-		locs[7] = locs[6].clone().add(0, 1, 0);
-		
-		for(Location l : locs) {
-			System.out.println(l.getBlockX() + " - " + l.getBlockY() + " - " + l.getBlockZ());
+		for(int i = 0; i < 8; i++) {
+			double d = i * Math.PI / 4;
+			locs[i] = new Location(loc.getWorld(), Math.sin(d) * 1.5 + loc.getX(), loc.getY(), Math.cos(d) * 1.5 + loc.getZ());
 		}
 		
-		if(list.contains(Element.WATER)) {
-			new WaterShieldEntity(locs);
-		}
+		new ShieldEntity(elements, locs);
 		
 	}
 	

@@ -33,7 +33,9 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		
+		for(MMPlayer p : MMPlayer.getAll()) {
+			p.deactivateSpellMode();
+		}
 	}
 	
 	public static Main getInstance() {
@@ -50,10 +52,10 @@ public class Main extends JavaPlugin {
 	}
 	
 	private static void registerSpells() {
-		SpellManager.registerSelfSpell(new SelfShieldSpell(null), SpellPriority.LOWEST);
+		SpellManager.registerSelfSpell(new SelfShieldSpell(), SpellPriority.LOWEST);
 		
-		SpellManager.registerTargetSpell(new TargetProjectileSpell(null), SpellPriority.LOWEST);
-		SpellManager.registerTargetSpell(new TargetShieldSpell(null), SpellPriority.LOWEST);
+		SpellManager.registerTargetSpell(new TargetProjectileSpell(), SpellPriority.LOWEST);
+		SpellManager.registerTargetSpell(new TargetShieldSpell(), SpellPriority.LOWEST);
 	}
 	
 	

@@ -63,7 +63,7 @@ public class MMPlayer {
 	}
 	
 	public void fireSpell(boolean self) {
-		if(spell[4] == Element.NONE) return;
+		if(spell[4] == Element.NONE || !isInSpellMode()) return;
 		SpellManager.getSpell(spell, self).fire(this);
 		clearSpell();
 	}
