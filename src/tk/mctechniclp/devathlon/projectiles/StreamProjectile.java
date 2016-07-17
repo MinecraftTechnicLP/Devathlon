@@ -36,6 +36,10 @@ public abstract class StreamProjectile extends Projectile {
 		
 	}
 	
+	public ArrayList<Location> getLocations() {
+		return new ArrayList<Location> (particleLocs);
+	}
+	
 	private void step() {
 		particleLocs.add(loc.clone());
 		loc.add(vec);

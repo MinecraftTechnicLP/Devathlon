@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import tk.mctechniclp.devathlon.api.Element;
 import tk.mctechniclp.devathlon.api.MMPlayer;
-import tk.mctechniclp.devathlon.api.ShieldSE;
 import tk.mctechniclp.devathlon.spells.SelfSpell;
+import tk.mctechniclp.devathlon.statuseffects.ShieldSE;
 
 public class SelfShieldSpell extends SelfSpell {
 

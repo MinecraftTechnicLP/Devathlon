@@ -1,7 +1,9 @@
-package tk.mctechniclp.devathlon.api;
+package tk.mctechniclp.devathlon.statuseffects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import tk.mctechniclp.devathlon.api.MMPlayer;
 
 public abstract class StatusEffect {
 	protected int ticks;
@@ -16,7 +18,7 @@ public abstract class StatusEffect {
 	
 	protected abstract void playParticles(Player p);
 	
-	protected void tick(MMPlayer p) {
+	public void tick(MMPlayer p) {
 		ticks--;
 		if(ticks == 0) p.removeStatusEffect(this);
 		playParticles(Bukkit.getPlayer(p.getUUID()));

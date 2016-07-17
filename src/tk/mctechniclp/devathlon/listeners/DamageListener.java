@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 import tk.mctechniclp.devathlon.api.Element;
 import tk.mctechniclp.devathlon.api.MMPlayer;
-import tk.mctechniclp.devathlon.api.ShieldSE;
+import tk.mctechniclp.devathlon.statuseffects.ShieldSE;
 
 public class DamageListener implements Listener {
 	

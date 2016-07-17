@@ -12,7 +12,7 @@ public class DamageStream extends StreamProjectile {
 	}
 
 	@Override
-	protected void impact(LivingEntity e) {
+	public void impact(LivingEntity e) {
 		if(e == null) return;
 		e.damage(4);
 	}

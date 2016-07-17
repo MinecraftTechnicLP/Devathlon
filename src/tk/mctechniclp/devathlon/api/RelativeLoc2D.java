@@ -2,10 +2,10 @@ package tk.mctechniclp.devathlon.api;
 
 import org.bukkit.Location;
 
-public class RelativeLoc2 {
+public class RelativeLoc2D {
 	private double x, z;
 
-	public RelativeLoc2(double x, double z) {
+	public RelativeLoc2D(double x, double z) {
 		this.x = x;
 		this.z = z;
 	}

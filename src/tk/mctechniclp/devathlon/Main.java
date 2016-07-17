@@ -9,6 +9,8 @@ import tk.mctechniclp.devathlon.listeners.AddElementListener;
 import tk.mctechniclp.devathlon.listeners.CollideListener;
 import tk.mctechniclp.devathlon.listeners.DamageListener;
 import tk.mctechniclp.devathlon.listeners.FireSpellListener;
+import tk.mctechniclp.devathlon.listeners.MoveItemListener;
+import tk.mctechniclp.devathlon.listeners.ToggleSpellModeListener;
 import tk.mctechniclp.devathlon.projectiles.Projectile;
 import tk.mctechniclp.devathlon.spells.SpellManager;
 import tk.mctechniclp.devathlon.spells.SpellPriority;
@@ -43,6 +45,8 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new AddElementListener(), instance);
 		Bukkit.getPluginManager().registerEvents(new DamageListener(), instance);
 		Bukkit.getPluginManager().registerEvents(new CollideListener(), instance);
+		Bukkit.getPluginManager().registerEvents(new ToggleSpellModeListener(), instance);
+		Bukkit.getPluginManager().registerEvents(new MoveItemListener(), instance);
 	}
 	
 	private static void registerSpells() {

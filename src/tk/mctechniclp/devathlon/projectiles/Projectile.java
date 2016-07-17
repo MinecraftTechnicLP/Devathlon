@@ -26,6 +26,9 @@ public abstract class Projectile {
 		this.particles = new ArrayList<Particle> (Arrays.asList(particles));
 	}
 	
+	public abstract void tick();
+	public abstract void impact(LivingEntity e);
+	
 	public void launch() {
 		register(this);
 	}
@@ -44,9 +47,6 @@ public abstract class Projectile {
 		
 		return null;
 	}
-
-	public abstract void tick();
-	protected abstract void impact(LivingEntity e);
 	
 	
 	

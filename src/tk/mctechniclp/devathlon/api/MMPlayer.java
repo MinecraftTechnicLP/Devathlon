@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import tk.mctechniclp.devathlon.spells.SpellManager;
+import tk.mctechniclp.devathlon.statuseffects.ShieldSE;
+import tk.mctechniclp.devathlon.statuseffects.StatusEffect;
 import tk.mctechniclp.devathlon.utils.ActionBarUtils;
 
 
@@ -15,6 +19,7 @@ public class MMPlayer {
 	private String spellMsg;
 	private ArrayList<StatusEffect> effects;
 	private ShieldSE shield;
+	private ItemStack[] backup;
 	
 	/**
 	 * <b>DO NOT USE THIS CONSTRUCTOR</b><br>
@@ -93,6 +98,45 @@ public class MMPlayer {
 	private void clearSpell() {
 		this.spell = new Element[] {Element.NONE, Element.NONE, Element.NONE, Element.NONE, Element.NONE};
 		this.spellMsg = Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation() + Element.NONE.getStringRepresentation();
+	}
+	
+	public boolean isInSpellMode() {
+		return backup != null;
+	}
+	
+	public void activateSpellMode() {
+		if(isInSpellMode()) return;
+		
+		Player p = Bukkit.getPlayer(uuid);
+		backup = p.getInventory().getContents();
+		ItemStack iMain = p.getInventory().getItemInMainHand();
+		ItemStack iOff = p.getInventory().getItemInOffHand();
+		
+		p.getInventory().clear();
+		
+		for(Element e : Element.values()) {
+			if(e == Element.NONE) continue;
+			p.getInventory().setItem(e.getSlot(), e.getItemStack());
+		}
+		p.getInventory().setItem(0, iMain);
+		p.getInventory().setItemInOffHand(iOff);
+		
+	}
+	
+	public void deactivateSpellMode() {
+		if(!isInSpellMode()) return;
+		
+		Player p = Bukkit.getPlayer(uuid);
+		p.getInventory().setContents(backup);
+		backup = null;
+	}
+	
+	public void switchSpellMode() {
+		if(isInSpellMode()) {
+			deactivateSpellMode();
+		} else {
+			activateSpellMode();
+		}
 	}
 	
 	
