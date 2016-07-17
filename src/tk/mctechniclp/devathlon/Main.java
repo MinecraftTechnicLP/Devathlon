@@ -15,6 +15,7 @@ import tk.mctechniclp.devathlon.projectiles.Projectile;
 import tk.mctechniclp.devathlon.spells.SpellManager;
 import tk.mctechniclp.devathlon.spells.SpellPriority;
 import tk.mctechniclp.devathlon.spells.self.SelfShieldSpell;
+import tk.mctechniclp.devathlon.spells.target.TargetMineSpell;
 import tk.mctechniclp.devathlon.spells.target.TargetProjectileSpell;
 import tk.mctechniclp.devathlon.spells.target.TargetShieldSpell;
 
