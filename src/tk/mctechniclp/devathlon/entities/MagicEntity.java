@@ -31,9 +31,13 @@ public abstract class MagicEntity {
 	
 	public void tick() {
 		if(ticks > 0) ticks--;
-		if(ticks == 0) removeEntity(this);
+		if(ticks == 0) die();
 		
 		playParticles();
+	}
+	
+	protected void die() {
+		removeEntity(this);
 	}
 	
 	public boolean isPhysical() {

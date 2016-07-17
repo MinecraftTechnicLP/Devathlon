@@ -1,36 +1,34 @@
 package tk.mctechniclp.devathlon.entities;
 
-import java.util.ArrayList;
+import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Item;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import tk.mctechniclp.devathlon.api.Element;
 
-public class ShieldEntity extends MagicEntity {
+public class MineEntity extends MagicEntity {
 	private Element[] es;
+	private Item i;
 	
-	public ShieldEntity(Element[] es, Location... locs) {
-		super(true, 100, locs);
+	public MineEntity(Element[] es, Location... locs) {
+		super(false, 1200, locs);
 		this.es = es;
-	}
-	
-	@Override
-	public void playParticles() {
-		for(Location loc : new ArrayList<Location>(locs)) {
-			Location l = loc.clone().add(0, -0.5, 0);
-			l.getWorld().spawnParticle(es[0].getParticle(), l, 1, 0, 0, 0, 0, null);
-			
-			for(int i = 0; i <= 10; i++) {
-				l.getWorld().spawnParticle(es[0].getParticle(), l.add(0, 0.1, 0), 1, 0, 0, 0, 0, null);
-			}
-		}
+		i = locs[0].getWorld().dropItem(locs[0], new ItemStack(es[0].getMaterial()));
+		i.setPickupDelay(1201);
 	}
 
 	@Override
 	public void collide(PlayerMoveEvent ev) {
+		for(Location loc : locs) {
+			loc.getWorld().spawnParticle(es[0].getParticle(), loc, 1, 0.5, 0.5, 0.5, 0.5, null);
+			loc.getWorld().createExplosion(loc, 0.8F, false);
+		}
+		
 		double damage = 0;
 		
 		switch(es[0]) {
@@ -66,7 +64,23 @@ public class ShieldEntity extends MagicEntity {
 		
 		ev.getPlayer().damage(damage, es[0].spawnArmorStand(ev.getPlayer().getLocation()));
 		
-		
 	}
 
+	@Override
+	public void playParticles() {
+		for(Location loc : locs) {
+			if(new Random().nextInt(8) == 0) {
+				loc.getWorld().spawnParticle(es[0].getParticle(), loc, 1, 0.1, 0.1, 0.1, 0.01, null);
+			}
+		}
+	}
+	
+	@Override
+	protected void die() {
+		super.die();
+		i.remove();
+	}
+	
+	
+	
 }

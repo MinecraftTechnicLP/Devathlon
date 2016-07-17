@@ -7,34 +7,35 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public enum Element {
 	
-	FIRE("F", 1, ChatColor.GOLD, Particle.FLAME, DyeColor.ORANGE),
-	WATER("\u2652", 2, ChatColor.BLUE, Particle.WATER_WAKE, DyeColor.BLUE),
-	ICE("\u2744", 3, ChatColor.AQUA, Particle.CLOUD, DyeColor.LIGHT_BLUE),
-	EARTH("E", 4, ChatColor.GRAY, Particle.VILLAGER_ANGRY, DyeColor.GRAY),
-	HEAL("H", 5, ChatColor.GREEN, Particle.VILLAGER_HAPPY, DyeColor.LIME),
-	DAMAGE("\u2623", 6, ChatColor.RED, Particle.REDSTONE, DyeColor.RED),
-	SHIELD("S", 7, ChatColor.YELLOW, Particle.DRIP_LAVA, DyeColor.YELLOW),
-	ELEC("\u2607", 8, ChatColor.LIGHT_PURPLE, Particle.PORTAL, DyeColor.PINK),
-	NONE("\u2609", -2, ChatColor.WHITE, null, null);
+	FIRE("F", 1, ChatColor.GOLD, Particle.FLAME, DyeColor.ORANGE, Material.BLAZE_POWDER),
+	WATER("\u2652", 2, ChatColor.BLUE, Particle.WATER_WAKE, DyeColor.BLUE, Material.WATER_BUCKET),
+	ICE("\u2744", 3, ChatColor.AQUA, Particle.CLOUD, DyeColor.LIGHT_BLUE, Material.PACKED_ICE),
+	EARTH("E", 4, ChatColor.GRAY, Particle.VILLAGER_ANGRY, DyeColor.GRAY, Material.DIRT),
+	HEAL("H", 5, ChatColor.GREEN, Particle.VILLAGER_HAPPY, DyeColor.LIME, Material.EMERALD),
+	DAMAGE("\u2623", 6, ChatColor.RED, Particle.REDSTONE, DyeColor.RED, Material.REDSTONE_BLOCK),
+	SHIELD("S", 7, ChatColor.YELLOW, Particle.DRIP_LAVA, DyeColor.YELLOW, Material.SHIELD),
+	ELEC("\u2607", 8, ChatColor.LIGHT_PURPLE, Particle.PORTAL, DyeColor.PINK, Material.SPECTRAL_ARROW),
+	NONE("\u2609", -2, ChatColor.WHITE, null, null, null);
 	
 	private String charCode;
 	private int slot;
 	private ChatColor color;
 	private Particle particle;
 	private DyeColor dye;
+	private Material mat;
 	
-	Element(String charCode, int slot, ChatColor color, Particle particle, DyeColor dye) {
+	Element(String charCode, int slot, ChatColor color, Particle particle, DyeColor dye, Material mat) {
 		this.charCode = charCode;
 		this.slot = slot;
 		this.color = color;
 		this.particle = particle;
 		this.dye = dye;
+		this.mat = mat;
 	}
 	
 	public Particle getParticle() {
@@ -59,6 +60,10 @@ public enum Element {
 	
 	public DyeColor getDyeColor() {
 		return dye;
+	}
+	
+	public Material getMaterial() {
+		return mat;
 	}
 	
 	public ItemStack getItemStack() {

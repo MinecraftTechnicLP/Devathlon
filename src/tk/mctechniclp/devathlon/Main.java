@@ -56,6 +56,7 @@ public class Main extends JavaPlugin {
 		
 		SpellManager.registerTargetSpell(new TargetProjectileSpell(), SpellPriority.LOWEST);
 		SpellManager.registerTargetSpell(new TargetShieldSpell(), SpellPriority.LOWEST);
+		SpellManager.registerTargetSpell(new TargetMineSpell(), SpellPriority.LOW);
 	}
 	
 	
